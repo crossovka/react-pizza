@@ -1,7 +1,7 @@
 import logo from '../assets/img/pizza-logo.svg';
 function Header() {
 	return (
-		<div className="header">
+		<header className="header">
 			<div className="container">
 				<div className="header__logo">
 					<img width="38" src={logo} alt="Pizza logo" />
@@ -29,7 +29,7 @@ function Header() {
 					</a>
 				</div>
 			</div>
-		</div>
+		</header>
 	)
 }
 

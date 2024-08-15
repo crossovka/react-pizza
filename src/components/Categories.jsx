@@ -1,13 +1,6 @@
 import { useState, useCallback } from 'react';
 
-const categoriesData = [
-	'Все',
-	'Мясные',
-	'Вегетарианская',
-	'Гриль',
-	'Острые',
-	'Закрытые',
-];
+import categoriesData from '../data/categories';
 
 function Categories() {
 	const [activeCategory, setActiveCategory] = useState(categoriesData[0]);
@@ -18,7 +11,7 @@ function Categories() {
 	// (in this case, an empty activeCategory) are changed.
 
 	// useCallback is used to memoize the handleCategoryClick function
-	const HandleCategoryClick = useCallback(
+	const HandleCategorySelect = useCallback(
 		(category) => {
 			if (activeCategory !== category) {
 				setActiveCategory(category);
@@ -32,13 +25,13 @@ function Categories() {
 	return (
 		<div className="categories">
 			<ul>
-				{categoriesData.map((category, index) => (
+				{categoriesData.map((category, i) => (
 					<li
-						key={index}
+						key={i}
 						className={activeCategory === category ? 'active' : ''}
 						// without an anonymous function, setActiveCategory will be called at the first render,
 						// it will change the value and the component will be rendered in one. in sum to many renders
-						onClick={() => HandleCategoryClick(category)}
+						onClick={() => HandleCategorySelect(category)}
 					>
 						{category}
 					</li>
