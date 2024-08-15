@@ -23,13 +23,13 @@ function Pizza({ imgUrl, title, types, sizes, category, price }) {
 			<div>
 				<div className="pizza-block__selector">
 					<ul>
-						{types.map((typeId) => (
+						{types.map((typeI) => (
 							<li
-								key={typeId}
-								className={activeType === typeId ? 'active' : ''}
-								onClick={() => setActiveType(typeId)}
+								key={typeI}
+								className={activeType === typeI ? 'active' : ''}
+								onClick={() => setActiveType(typeI)}
 							>
-								{pizzaTypes[typeId]}
+								{pizzaTypes[typeI]}
 							</li>
 						))}
 					</ul>
