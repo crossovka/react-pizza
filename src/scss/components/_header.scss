@@ -12,15 +12,12 @@
 
 	&__logo {
 		display: flex;
-
-		img {
-			margin-right: 15px;
-		}
+		gap: 15px;
 
 		h1 {
 			color: #181818;
 			font-size: 24px;
-			letter-spacing: 1%;
+			letter-spacing: 0.01em;
 			text-transform: uppercase;
 			font-weight: 800;
 		}

@@ -5,9 +5,7 @@
 	text-align: center;
 	margin-bottom: 65px;
 
-	&:not(:nth-of-type(4n)) {
-		margin-right: 35px;
-	}
+
 
 	&__image {
 		width: 260px;
@@ -16,7 +14,7 @@
 	&__title {
 		font-size: 20px;
 		font-weight: 900;
-		letter-spacing: 1%;
+		letter-spacing: 0.01em;
 		margin-bottom: 20px;
 	}
 
@@ -26,6 +24,7 @@
 		border-radius: 10px;
 		flex-direction: column;
 		padding: 6px;
+		margin-bottom: 22px;
 
 		ul {
 			display: flex;
@@ -55,9 +54,9 @@
 
 	&__bottom {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
-		margin-top: 20px;
 	}
 
 	&__price {

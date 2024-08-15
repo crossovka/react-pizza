@@ -37,7 +37,11 @@ function App() {
 						<h2 className="content__title">Все пиццы</h2>
 						<div className="content__items">
 							{pizzaData.map((pizza) => (
-								<Pizza key={pizza.title} title={pizza.title} price={pizza.price} />
+								<Pizza
+									key={pizza.title}
+									title={pizza.title}
+									price={pizza.price}
+								/>
 							))}
 						</div>
 					</div>
