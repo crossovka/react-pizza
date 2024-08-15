@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 
 function Pizza({ imgUrl, title, types, sizes, category, price }) {
-	console.log(`Рендер ${title}`);
 	const pizzaTypes = ['тонкое', 'традиционное'];
 
 	const [activeType, setActiveType] = useState(types[0]);
@@ -12,7 +11,6 @@ function Pizza({ imgUrl, title, types, sizes, category, price }) {
 		(i) => {
 			if (activeSize !== i) {
 				setActiveSize(i);
-				console.log(`Рендер ${title} click ${i}`);
 			}
 		},
 		[activeSize]
@@ -25,13 +23,13 @@ function Pizza({ imgUrl, title, types, sizes, category, price }) {
 			<div>
 				<div className="pizza-block__selector">
 					<ul>
-						{types.map((type) => (
+						{types.map((typeId) => (
 							<li
-								key={type}
-								className={activeType === type ? 'active' : ''}
-								onClick={() => setActiveType(type)}
+								key={typeId}
+								className={activeType === typeId ? 'active' : ''}
+								onClick={() => setActiveType(typeId)}
 							>
-								{pizzaTypes[type]}
+								{pizzaTypes[typeId]}
 							</li>
 						))}
 					</ul>

@@ -5,8 +5,6 @@ import categoriesData from '../data/categories';
 function Categories() {
 	const [activeCategory, setActiveCategory] = useState(categoriesData[0]);
 
-	console.log(`Рендер ${activeCategory}`);
-
 	// Now the handleClick function is created only once and is used at each render until the dependencies
 	// (in this case, an empty activeCategory) are changed.
 
