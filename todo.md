@@ -11,7 +11,13 @@
 	- [] Типография
 	- [] --section-padding
 
+- манифест
+- Robots.txt
+- Favicon
+- метрики
+
 ## Front
+
 
 ## Back
 
