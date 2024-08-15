@@ -23,9 +23,11 @@ function Categories() {
 	return (
 		<div className="categories">
 			<ul>
-				{categoriesData.map(({ id, category }) => (
+				{categoriesData.map((category, i) => (
 					<li
-						key={id}
+						// if the array stays static, you can safely pass index into key
+						key={i}
+						// key={id}
 						className={activeCategory === category ? 'active' : ''}
 						// without an anonymous function, setActiveCategory will be called at the first render,
 						// it will change the value and the component will be rendered in one. in sum to many renders
