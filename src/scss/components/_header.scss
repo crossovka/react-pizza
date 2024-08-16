@@ -8,6 +8,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 20px;
 	}
 
 	&__logo {
@@ -48,5 +50,9 @@
 		p {
 			color: #7b7b7b;
 		}
+	}
+
+	&__cart{
+		flex: 0 0 auto;
 	}
 }

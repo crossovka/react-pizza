@@ -113,16 +113,18 @@ body {
 
 	&__item {
 		display: flex;
+		flex-wrap: wrap;
+		gap: 40px;
 		width: 100%;
-		border-top: 1px solid $gray-line;
+
 		padding-top: 30px;
 		margin-top: 30px;
+
+		border-top: 1px solid $gray-line;
 
 		&-img {
 			display: flex;
 			align-items: center;
-			margin-right: 15px;
-			width: 10%;
 
 			img {
 				width: 80px;
@@ -130,11 +132,25 @@ body {
 			}
 		}
 
+		// .cart__item-left
+		&-left {
+			flex: 2 1 auto;
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+		// .cart__item-right
+		&-right {
+			flex: 1 1 auto;
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+
 		&-info {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			width: 40%;
 
 			h3 {
 				font-weight: bold;
@@ -150,10 +166,11 @@ body {
 		}
 
 		&-count {
+			flex: 0 0 10%;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			width: 13%;
+			gap: 12px;
 
 			&-minus {
 				svg {
@@ -169,10 +186,10 @@ body {
 		}
 
 		&-price {
+			flex: 1 1 auto;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 33%;
 
 			b {
 				font-weight: bold;
@@ -185,7 +202,6 @@ body {
 			display: flex;
 			align-items: center;
 			justify-content: flex-end;
-			width: 4%;
 
 			.button {
 				border-color: darken($color: $gray-line, $amount: 10);

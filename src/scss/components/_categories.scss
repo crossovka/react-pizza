@@ -1,10 +1,20 @@
 @import '../variables';
 
 .categories {
+	@media (max-width: 767.98px) {
+		overflow: hidden;
+	}
+
 	ul {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 16px 10px;
+
+		@media (max-width: 767.98px) {
+			overflow: auto;
+			flex-wrap: nowrap;
+			padding-bottom: 10px;
+		}
 
 		li {
 			background-color: #f9f9f9;
