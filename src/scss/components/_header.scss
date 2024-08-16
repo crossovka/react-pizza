@@ -12,7 +12,30 @@
 
 	&__logo {
 		display: flex;
+		align-items: center;
 		gap: 15px;
+
+		img {
+			transition: transform 0.3s ease-in-out;
+
+			@media (any-hover: hover) {
+				&:hover {
+					transform: scale(1.2);
+				}
+			}
+		}
+
+		a {
+			h1 {
+				transition: color 0.3s ease;
+
+				@media (any-hover: hover) {
+					&:hover {
+						color: $orange;
+					}
+				}
+			}
+		}
 
 		h1 {
 			color: #181818;

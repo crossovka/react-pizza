@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
-function Pizza({ imgUrl, title, types, sizes, category, price }) {
+function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
 	const pizzaTypes = ['тонкое', 'традиционное'];
 
 	const [activeType, setActiveType] = useState(types[0]);
@@ -19,7 +20,16 @@ function Pizza({ imgUrl, title, types, sizes, category, price }) {
 	return (
 		<div className="pizza-block">
 			<img className="pizza-block__image" src={imgUrl} alt="Pizza" />
-			<h4 className="pizza-block__title">{title}</h4>
+			{/* <a href='' className="pizza-block__title">{title}</a> */}
+			<Link
+				to={{
+					pathname: `/pizza/${id}`,
+					state: { title },
+				}}
+				className="pizza-block__title"
+			>
+				{title}
+			</Link>
 			<div>
 				<div className="pizza-block__selector">
 					<ul>
