@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
+import CategorySkeleton from './skeleton.jsx';
 
 function Categories() {
 	const [categories, setCategories] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 	const [activeCategory, setActiveCategory] = useState(categories[0]);
 
 	useEffect(() => {
@@ -15,10 +16,10 @@ function Categories() {
 			} catch (error) {
 				console.error('Error fetching the categories data', error);
 			} finally {
-				setLoading(false);
+				setIsLoading(false);
 			}
 		};
-		const timer = setTimeout(fetchCategories, 500);
+		const timer = setTimeout(fetchCategories, 1000);
 
 		return () => {
 			clearTimeout(timer);
@@ -43,23 +44,21 @@ function Categories() {
 	return (
 		<div className="categories">
 			<ul>
-				{loading ? (
-					<div>Loading...</div>
-				) : (
-					categories.map((category, i) => (
-						<li
-							// if the array stays static, you can safely pass index into key
-							key={i}
-							// key={id}
-							className={activeCategory === category ? 'active' : ''}
-							// without an anonymous function, setActiveCategory will be called at the first render,
-							// it will change the value and the component will be rendered in one. in sum to many renders
-							onClick={() => HandleCategorySelect(category)}
-						>
-							{category}
-						</li>
-					))
-				)}
+				{isLoading
+					? [...new Array(6)].map((_, i) => <CategorySkeleton key={i} />)
+					: categories.map((category, i) => (
+							<li
+								// if the array stays static, you can safely pass index into key
+								// key={id}
+								key={i}
+								className={activeCategory === category ? 'active' : ''}
+								// without an anonymous function, setActiveCategory will be called at the first render,
+								// it will change the value and the component will be rendered in one. in sum to many renders
+								onClick={() => HandleCategorySelect(category)}
+							>
+								{category}
+							</li>
+					))}
 			</ul>
 		</div>
 	);

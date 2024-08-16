@@ -24,9 +24,9 @@ body {
 	}
 
 	&__items {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		justify-items: center;
 		gap: 50px 20px;
 	}
 

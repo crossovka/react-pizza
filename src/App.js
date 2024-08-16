@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Header from './components/Header';
-import Categories from './components/Categories';
+import Categories from './components/Categories/index.jsx';
 import Sort from './components/Sort';
 import Pizza from './components/Pizza';
+import PizzaSkeleton from './components/Pizza/skeleton.jsx';
+
 import './scss/app.scss';
 
 function App() {
 	const [pizzas, setPizzas] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		console.log('Fetching pizzas...');
@@ -20,11 +22,11 @@ function App() {
 			} catch (error) {
 				console.error('Error fetching the pizzas data', error);
 			} finally {
-				setLoading(false);
+				setIsLoading(false);
 			}
 		};
 
-		const timer = setTimeout(fetchPizzas, 1000);
+		const timer = setTimeout(fetchPizzas, 1500);
 
 		return () => {
 			clearTimeout(timer);
@@ -43,15 +45,9 @@ function App() {
 						</div>
 						<h2 className="content__title">Все пиццы</h2>
 						<div className="content__items">
-							{loading ? (
-								<p style={{ textAlign: 'center', width: '100%' }}>Loading...</p>
-							) : (
-								<>
-									{pizzas.map((pizza) => (
-										<Pizza key={pizza.id} {...pizza} />
-									))}
-								</>
-							)}
+							{isLoading
+								? [...new Array(6)].map((_, i) => <PizzaSkeleton key={i} />)
+								: pizzas.map((pizza) => <Pizza key={pizza.id} {...pizza} />)}
 						</div>
 					</div>
 				</main>
