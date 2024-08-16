@@ -12,6 +12,7 @@ export default function Home() {
 
 	useEffect(() => {
 		console.log('Fetching pizzas...');
+		window.scrollTo(0, 0);
 		const fetchPizzas = async () => {
 			try {
 				const response = await axios.get('/data/pizzas.json');
