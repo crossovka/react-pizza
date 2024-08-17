@@ -11,11 +11,9 @@ export default function Home() {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		console.log('Fetching pizzas...');
-		window.scrollTo(0, 0);
 		const fetchPizzas = async () => {
 			try {
-				const response = await axios.get('/data/pizzas.json');
+				const response = await axios.get('https://015079367f53b5d9.mokky.dev/pizzas');
 				setPizzas(response.data);
 			} catch (error) {
 				console.error('Error fetching the pizzas data', error);
@@ -23,12 +21,8 @@ export default function Home() {
 				setIsLoading(false);
 			}
 		};
-
-		const timer = setTimeout(fetchPizzas, 1500);
-
-		return () => {
-			clearTimeout(timer);
-		};
+		fetchPizzas();
+		window.scrollTo(0, 0);
 	}, []);
 
 	return (

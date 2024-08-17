@@ -5,6 +5,14 @@ function Sort() {
 	const [selected, setSelected] = useState(0);
 
 	const sortOptions = ['популярности', 'цене', 'алфавиту'];
+	// const sortOptions = [
+	// 	{ name: 'популярности (Asc)', sortProperty: 'rating' },
+	// 	{ name: 'популярности (Desc)', sortProperty: '-rating' },
+	// 	{ name: 'цене (Asc)', sortProperty: 'price' },
+	// 	{ name: 'цене (Desc)', sortProperty: '-price' },
+	// 	{ name: 'алфавиту (Asc)', sortProperty: 'title' },
+	// 	{ name: 'алфавиту (Desc)', sortProperty: '-title' },
+	// ];
 	const selectedOption = sortOptions[selected];
 
 	function HandleSelect(i) {

@@ -8,10 +8,11 @@ function Categories() {
 	const [activeCategory, setActiveCategory] = useState(categories[0]);
 
 	useEffect(() => {
-		console.log('Fetching categories...');
 		const fetchCategories = async () => {
 			try {
-				const response = await axios.get('/data/categories.json');
+				const response = await axios.get(
+					'https://015079367f53b5d9.mokky.dev/pizzas-categories'
+				);
 				setCategories(response.data);
 			} catch (error) {
 				console.error('Error fetching the categories data', error);
@@ -19,11 +20,7 @@ function Categories() {
 				setIsLoading(false);
 			}
 		};
-		const timer = setTimeout(fetchCategories, 1000);
-
-		return () => {
-			clearTimeout(timer);
-		};
+		fetchCategories();
 	}, []);
 
 	// Now the handleClick function is created only once and is used at each render until the dependencies
@@ -58,7 +55,7 @@ function Categories() {
 							>
 								{category}
 							</li>
-					))}
+					  ))}
 			</ul>
 		</div>
 	);
