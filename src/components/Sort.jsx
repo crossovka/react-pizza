@@ -1,23 +1,29 @@
 import { useState } from 'react';
 
-function Sort() {
+function Sort({ activeSortType, setActiveSortType }) {
 	const [open, setIsOpen] = useState(false);
-	const [selected, setSelected] = useState(0);
 
-	const sortOptions = ['популярности', 'цене', 'алфавиту'];
-	// const sortOptions = [
-	// 	{ name: 'популярности (Asc)', sortProperty: 'rating' },
-	// 	{ name: 'популярности (Desc)', sortProperty: '-rating' },
-	// 	{ name: 'цене (Asc)', sortProperty: 'price' },
-	// 	{ name: 'цене (Desc)', sortProperty: '-price' },
-	// 	{ name: 'алфавиту (Asc)', sortProperty: 'title' },
-	// 	{ name: 'алфавиту (Desc)', sortProperty: '-title' },
-	// ];
-	const selectedOption = sortOptions[selected];
+	const sortOptions = [
+		{ name: 'популярности (Desc)', sortProperty: '-rating' },
+		{ name: 'цене (Asc)', sortProperty: 'price' },
+		{ name: 'цене (Desc)', sortProperty: '-price' },
+		{ name: 'алфавиту (Asc)', sortProperty: 'title' },
+		{ name: 'алфавиту (Desc)', sortProperty: '-title' },
+	];
 
-	function HandleSelect(i) {
-		if (selected !== i) {
-			setSelected(i);
+	// function HandleSelect(sortProperty) {
+	// 	if (activeSortType !== sortProperty) {
+	// 		setActiveSortType(sortProperty);
+	// 		setIsOpen(false);
+	// 	}
+	// }
+
+	function HandleSelect(sortProperty) {
+		if (activeSortType.sortProperty !== sortProperty) {
+			const selectedOption = sortOptions.find(
+				(option) => option.sortProperty === sortProperty
+			);
+			setActiveSortType(selectedOption);
 			setIsOpen(false);
 		}
 	}
@@ -40,17 +46,21 @@ function Sort() {
 				</svg>
 				<b>Сортировка по:</b>
 				<div className="sort__popup-wrap">
-					<span onClick={() => setIsOpen(!open)}>{selectedOption}</span>
+					<span onClick={() => setIsOpen(!open)}>{activeSortType.name}</span>
 					<div className={`sort__popup ${open ? 'active' : ''}`}>
 						{/* {open && ( */}
 						<ul>
-							{sortOptions.map((sortOption, i) => (
+							{sortOptions.map((obj, i) => (
 								<li
 									key={i}
-									onClick={() => HandleSelect(i)}
-									className={selected === i ? 'active' : ''}
+									onClick={() => HandleSelect(obj.sortProperty)}
+									className={
+										activeSortType.sortProperty === obj.sortProperty
+											? 'active'
+											: ''
+									}
 								>
-									{sortOption}
+									{obj.name}
 								</li>
 							))}
 						</ul>

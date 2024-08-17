@@ -43,6 +43,7 @@
 		opacity: 0;
 		// overflow: hidden;
 		// visibility: hidden;
+		pointer-events: none;
 
 		transform: translate(-50%, 40px);
 		transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -51,6 +52,7 @@
 			opacity: 1;
 			visibility: visible;
 			transform: translate(-50%, 25px);
+			pointer-events: all;
 		}
 
 		ul {
