@@ -5,10 +5,14 @@ import Categories from '../components/Categories/';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza/';
 import PizzaSkeleton from '../components/Pizza/skeleton.jsx';
+import Pagination from '../components/Pagination';
 
 export default function Home() {
-	const [pizzas, setPizzas] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [pizzas, setPizzas] = useState([]);
+	const [totalPages, setTotalPages] = useState();
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 4;
 
 	const categories = [
 		'Все',
@@ -34,11 +38,16 @@ export default function Home() {
 
 			try {
 				const response = await axios.get(
-					`https://015079367f53b5d9.mokky.dev/pizzas?${category}&sortBy=${sortBy}`
+					`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}`
 				);
-				setPizzas(response.data);
+				console.log(response.data.meta);
+				setTotalPages(response.data.meta.total_pages);
+
+				setPizzas(response.data.items);
 			} catch (error) {
 				console.error('Error fetching the pizzas data', error);
+				setPizzas([]);
+				setTotalPages(1);
 			} finally {
 				setIsLoading(false);
 			}
@@ -46,7 +55,14 @@ export default function Home() {
 		fetchPizzas();
 		// FIXME
 		// window.scrollTo(0, 0);
-	}, [activeCategory, activeSortType]);
+	}, [activeCategory, activeSortType, totalPages, currentPage]);
+
+	const pizzasSkeleton = [...new Array(itemsPerPage)].map((_, i) => (
+		<PizzaSkeleton key={i} />
+	));
+	const renderedPizzas = pizzas.map((pizza) => (
+		<Pizza key={pizza.id} {...pizza} />
+	));
 
 	return (
 		<>
@@ -63,10 +79,13 @@ export default function Home() {
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">
-				{isLoading
-					? [...new Array(8)].map((_, i) => <PizzaSkeleton key={i} />)
-					: pizzas.map((pizza) => <Pizza key={pizza.id} {...pizza} />)}
+				{isLoading ? pizzasSkeleton : renderedPizzas}
 			</div>
+			<Pagination
+				onChangePage={(Number) => setCurrentPage(Number)}
+				totalPages={totalPages}
+				currentPage={currentPage}
+			/>
 		</>
 	);
 }
