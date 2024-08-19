@@ -1,12 +1,11 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 import App from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PizzaPage from './pages/PizzaPage';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 import DevErrorPage from './pages/ErrorPageDev';
 import ProdErrorPage from './pages/ErrorPageProd';
 
@@ -37,7 +36,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<RouterProvider router={router} />
+	<Provider store={store}>
+		<RouterProvider router={router} />
+	</Provider>
 );
 
 {

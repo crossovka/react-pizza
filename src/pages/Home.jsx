@@ -1,7 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setActiveCategory } from '../redux/slices/filterSlice';
+// import { setSearchValue } from '../redux/slices/searchSlice';
 
-import { SearchContext } from '../App';
 import Categories from '../components/Categories/';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza/';
@@ -9,44 +11,32 @@ import PizzaSkeleton from '../components/Pizza/skeleton.jsx';
 import Pagination from '../components/Pagination';
 
 export default function Home() {
+	const dispatch = useDispatch();
+	const activeCategory = useSelector(
+		(state) => state.filterSlice.activeCategory
+	);
+	const sortOptions = useSelector((state) => state.sortSlice.sortOptions);
+	const searchValue = useSelector((state) => state.searchSlice.searchValue);
+
 	const [isLoading, setIsLoading] = useState(true);
-	const { searchValue } = useContext(SearchContext);
 	const [pizzas, setPizzas] = useState([]);
 	const [totalPages, setTotalPages] = useState();
 	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 4;
-
-	const categories = [
-		'Все',
-		'Мясные',
-		'Вегетарианская',
-		'Гриль',
-		'Острые',
-		'Закрытые',
-	];
-	const [activeCategory, setActiveCategory] = useState(0);
-
-	const [activeSortType, setActiveSortType] = useState({
-		name: 'популярности (Asc)',
-		sortProperty: 'rating',
-	});
 
 	useEffect(() => {
 		setIsLoading(true);
 
 		const fetchPizzas = async () => {
 			const search = searchValue ? `&title=*${searchValue}*` : '';
-			const sortBy = activeSortType.sortProperty;
+			const sortBy = sortOptions.sortProperty;
 			const category = activeCategory > 0 ? `&category=${activeCategory}` : '';
 
 			try {
 				const response = await axios.get(
 					`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}${search}`
 				);
-				// console.log(search);
-				// console.log(response.data.meta);
 				setTotalPages(response.data.meta.total_pages);
-
 				setPizzas(response.data.items);
 			} catch (error) {
 				console.error('Error fetching the pizzas data', error);
@@ -57,9 +47,7 @@ export default function Home() {
 			}
 		};
 		fetchPizzas();
-		// FIXME
-		// window.scrollTo(0, 0);
-	}, [searchValue, activeCategory, activeSortType, totalPages, currentPage]);
+	}, [searchValue, activeCategory, sortOptions, currentPage]);
 
 	const pizzasSkeleton = [...new Array(itemsPerPage)].map((_, i) => (
 		<PizzaSkeleton key={i} />
@@ -72,21 +60,17 @@ export default function Home() {
 		<>
 			<div className="content__top">
 				<Categories
-					categories={categories}
 					activeCategory={activeCategory}
-					setActiveCategory={setActiveCategory}
+					setActiveCategory={(index) => dispatch(setActiveCategory(index))}
 				/>
-				<Sort
-					activeSortType={activeSortType}
-					setActiveSortType={setActiveSortType}
-				/>
+				<Sort />
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">
 				{isLoading ? pizzasSkeleton : renderedPizzas}
 			</div>
 			<Pagination
-				onChangePage={(Number) => setCurrentPage(Number)}
+				onChangePage={(page) => setCurrentPage(page)}
 				totalPages={totalPages}
 				currentPage={currentPage}
 			/>

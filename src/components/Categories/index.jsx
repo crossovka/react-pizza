@@ -2,22 +2,30 @@ import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import CategorySkeleton from './skeleton.jsx';
 
-function Categories({ categories, activeCategory, setActiveCategory }) {
+function Categories({ activeCategory, setActiveCategory }) {
 	const [isLoading, setIsLoading] = useState(false);
+	const categories = [
+		'Все',
+		'Мясные',
+		'Вегетарианская',
+		'Гриль',
+		'Острые',
+		'Закрытые',
+	];
 
 	// Now the handleClick function is created only once and is used at each render until the dependencies
 	// (in this case, an empty activeCategory) are changed.
 
 	// useCallback is used to memoize the handleCategoryClick function
 	const HandleCategorySelect = useCallback(
-		(index) => {
-			if (activeCategory !== index) {
-				setActiveCategory(index);
-			}
-		},
-		[activeCategory]
-	);
-	// Dependencies are an empty array, which means at the first render
+    (index) => {
+      if (activeCategory !== index) {
+        setActiveCategory(index);
+      }
+    },
+    [activeCategory, setActiveCategory]
+  );
+	// are an empty array, which means at the first render
 	// Add activeCategory as a dependency. now the handleCategoryClick function will be recreated only when the activeCategory changes
 
 	return (

@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 todo.md
+# Ignore everything in the "todoImgs" folder
+todoImgs/**
 
 # dependencies
 /node_modules

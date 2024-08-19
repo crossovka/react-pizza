@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setActiveSortType } from '../redux/slices/sortSlice';
 
-function Sort({ activeSortType, setActiveSortType }) {
+const Sort = () => {
 	const [open, setIsOpen] = useState(false);
+	const dispatch = useDispatch();
+	const sortOptions = useSelector((state) => state.sortSlice.sortOptions);
 
-	const sortOptions = [
+	const availableSortOptions = [
 		{ name: 'популярности (Desc)', sortProperty: '-rating' },
 		{ name: 'цене (Asc)', sortProperty: 'price' },
 		{ name: 'цене (Desc)', sortProperty: '-price' },
@@ -11,22 +15,15 @@ function Sort({ activeSortType, setActiveSortType }) {
 		{ name: 'алфавиту (Desc)', sortProperty: '-title' },
 	];
 
-	// function HandleSelect(sortProperty) {
-	// 	if (activeSortType !== sortProperty) {
-	// 		setActiveSortType(sortProperty);
-	// 		setIsOpen(false);
-	// 	}
-	// }
-
-	function HandleSelect(sortProperty) {
-		if (activeSortType.sortProperty !== sortProperty) {
-			const selectedOption = sortOptions.find(
+	const handleSelect = (sortProperty) => {
+		if (sortOptions.sortProperty !== sortProperty) {
+			const selectedOption = availableSortOptions.find(
 				(option) => option.sortProperty === sortProperty
 			);
-			setActiveSortType(selectedOption);
+			dispatch(setActiveSortType(selectedOption));
 			setIsOpen(false);
 		}
-	}
+	};
 
 	return (
 		<div className="sort">
@@ -46,30 +43,28 @@ function Sort({ activeSortType, setActiveSortType }) {
 				</svg>
 				<b>Сортировка по:</b>
 				<div className="sort__popup-wrap">
-					<span onClick={() => setIsOpen(!open)}>{activeSortType.name}</span>
+					<span onClick={() => setIsOpen(!open)}>{sortOptions.name}</span>
 					<div className={`sort__popup ${open ? 'active' : ''}`}>
-						{/* {open && ( */}
 						<ul>
-							{sortOptions.map((obj, i) => (
+							{availableSortOptions.map((option, i) => (
 								<li
 									key={i}
-									onClick={() => HandleSelect(obj.sortProperty)}
+									onClick={() => handleSelect(option.sortProperty)}
 									className={
-										activeSortType.sortProperty === obj.sortProperty
+										sortOptions.sortProperty === option.sortProperty
 											? 'active'
 											: ''
 									}
 								>
-									{obj.name}
+									{option.name}
 								</li>
 							))}
 						</ul>
-						{/* )} */}
 					</div>
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
 export default Sort;
