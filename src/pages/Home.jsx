@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
+import { SearchContext } from '../App';
 import Categories from '../components/Categories/';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza/';
@@ -9,6 +10,7 @@ import Pagination from '../components/Pagination';
 
 export default function Home() {
 	const [isLoading, setIsLoading] = useState(true);
+	const { searchValue } = useContext(SearchContext);
 	const [pizzas, setPizzas] = useState([]);
 	const [totalPages, setTotalPages] = useState();
 	const [currentPage, setCurrentPage] = useState(1);
@@ -33,14 +35,16 @@ export default function Home() {
 		setIsLoading(true);
 
 		const fetchPizzas = async () => {
+			const search = searchValue ? `&title=*${searchValue}*` : '';
 			const sortBy = activeSortType.sortProperty;
 			const category = activeCategory > 0 ? `&category=${activeCategory}` : '';
 
 			try {
 				const response = await axios.get(
-					`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}`
+					`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}${search}`
 				);
-				console.log(response.data.meta);
+				// console.log(search);
+				// console.log(response.data.meta);
 				setTotalPages(response.data.meta.total_pages);
 
 				setPizzas(response.data.items);
@@ -55,7 +59,7 @@ export default function Home() {
 		fetchPizzas();
 		// FIXME
 		// window.scrollTo(0, 0);
-	}, [activeCategory, activeSortType, totalPages, currentPage]);
+	}, [searchValue, activeCategory, activeSortType, totalPages, currentPage]);
 
 	const pizzasSkeleton = [...new Array(itemsPerPage)].map((_, i) => (
 		<PizzaSkeleton key={i} />
