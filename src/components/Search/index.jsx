@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchValue } from '../../redux/slices/searchSlice';
+import { setSearchValue } from '../../redux/slices/filterSlice';
 
 import searchIcon from '../../assets/img/search.svg';
 import clearIcon from '../../assets/img/cansel.svg';
@@ -9,7 +9,7 @@ import styles from './Search.module.scss';
 
 export const Search = () => {
 	const dispatch = useDispatch();
-	const searchValue = useSelector((state) => state.searchSlice.searchValue);
+	const searchValue = useSelector((state) => state.filterSlice.searchValue);
 	const inputRef = useRef();
 	const [localSearchValue, setLocalSearchValue] = useState(searchValue);
 
@@ -32,7 +32,6 @@ export const Search = () => {
 	};
 
 	useEffect(() => {
-		
 		setLocalSearchValue(searchValue);
 	}, [searchValue]);
 

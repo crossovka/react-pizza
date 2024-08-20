@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveCategory } from '../redux/slices/filterSlice';
-// import { setSearchValue } from '../redux/slices/searchSlice';
+import {
+	setActiveCategory,
+	setCurrentPage,
+} from '../redux/slices/filterSlice';
 
 import Categories from '../components/Categories/';
 import Sort from '../components/Sort';
@@ -12,16 +14,13 @@ import Pagination from '../components/Pagination';
 
 export default function Home() {
 	const dispatch = useDispatch();
-	const activeCategory = useSelector(
-		(state) => state.filterSlice.activeCategory
+	const { activeCategory, searchValue, sortOptions, currentPage } = useSelector(
+		(state) => state.filterSlice
 	);
-	const sortOptions = useSelector((state) => state.sortSlice.sortOptions);
-	const searchValue = useSelector((state) => state.searchSlice.searchValue);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [pizzas, setPizzas] = useState([]);
 	const [totalPages, setTotalPages] = useState();
-	const [currentPage, setCurrentPage] = useState(1);
 	const itemsPerPage = 4;
 
 	useEffect(() => {
@@ -33,6 +32,9 @@ export default function Home() {
 			const category = activeCategory > 0 ? `&category=${activeCategory}` : '';
 
 			try {
+				console.log(
+					`Fetching pizzas: page=${currentPage}, category=${category}, sortBy=${sortBy}, search=${search}`
+				);
 				const response = await axios.get(
 					`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}${search}`
 				);
@@ -61,7 +63,10 @@ export default function Home() {
 			<div className="content__top">
 				<Categories
 					activeCategory={activeCategory}
-					setActiveCategory={(index) => dispatch(setActiveCategory(index))}
+					setActiveCategory={(index) => {
+						dispatch(setActiveCategory(index));
+						dispatch(setCurrentPage(1));
+					}}
 				/>
 				<Sort />
 			</div>
@@ -70,7 +75,7 @@ export default function Home() {
 				{isLoading ? pizzasSkeleton : renderedPizzas}
 			</div>
 			<Pagination
-				onChangePage={(page) => setCurrentPage(page)}
+				onChangePage={(page) => dispatch(setCurrentPage(page))}
 				totalPages={totalPages}
 				currentPage={currentPage}
 			/>

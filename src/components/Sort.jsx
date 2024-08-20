@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveSortType } from '../redux/slices/sortSlice';
+import { setActiveSortType } from '../redux/slices/filterSlice';
 
 const Sort = () => {
-	const [open, setIsOpen] = useState(false);
 	const dispatch = useDispatch();
-	const sortOptions = useSelector((state) => state.sortSlice.sortOptions);
+	const sortOptions = useSelector((state) => state.filterSlice.sortOptions);
+	const [open, setIsOpen] = useState(false);
 
-	const availableSortOptions = [
+	const options = [
 		{ name: 'популярности (Desc)', sortProperty: '-rating' },
 		{ name: 'цене (Asc)', sortProperty: 'price' },
 		{ name: 'цене (Desc)', sortProperty: '-price' },
@@ -17,7 +17,7 @@ const Sort = () => {
 
 	const handleSelect = (sortProperty) => {
 		if (sortOptions.sortProperty !== sortProperty) {
-			const selectedOption = availableSortOptions.find(
+			const selectedOption = options.find(
 				(option) => option.sortProperty === sortProperty
 			);
 			dispatch(setActiveSortType(selectedOption));
@@ -46,17 +46,17 @@ const Sort = () => {
 					<span onClick={() => setIsOpen(!open)}>{sortOptions.name}</span>
 					<div className={`sort__popup ${open ? 'active' : ''}`}>
 						<ul>
-							{availableSortOptions.map((option, i) => (
+							{options.map((obj) => (
 								<li
-									key={i}
-									onClick={() => handleSelect(option.sortProperty)}
+									key={obj.sortProperty}
+									onClick={() => handleSelect(obj.sortProperty)}
 									className={
-										sortOptions.sortProperty === option.sortProperty
+										sortOptions.sortProperty === obj.sortProperty
 											? 'active'
 											: ''
 									}
 								>
-									{option.name}
+									{obj.name}
 								</li>
 							))}
 						</ul>

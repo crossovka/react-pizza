@@ -4,11 +4,10 @@ import Home from './pages/Home';
 import './scss/app.scss';
 
 function App() {
-
 	return (
-			<Layout>
-				<Home />
-			</Layout>
+		<Layout>
+			<Home />
+		</Layout>
 	);
 }
 
