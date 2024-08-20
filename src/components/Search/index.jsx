@@ -1,4 +1,4 @@
-import { useState, createRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/searchSlice';
@@ -10,7 +10,7 @@ import styles from './Search.module.scss';
 export const Search = () => {
 	const dispatch = useDispatch();
 	const searchValue = useSelector((state) => state.searchSlice.searchValue);
-	const inputRef = createRef();
+	const inputRef = useRef();
 	const [localSearchValue, setLocalSearchValue] = useState(searchValue);
 
 	const debouncedSetSearchValue = useCallback(
@@ -27,10 +27,12 @@ export const Search = () => {
 	const handleClearSearch = () => {
 		setLocalSearchValue('');
 		dispatch(setSearchValue(''));
+		debouncedSetSearchValue.cancel();
 		inputRef.current.focus();
 	};
 
 	useEffect(() => {
+		
 		setLocalSearchValue(searchValue);
 	}, [searchValue]);
 
