@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	setActiveCategory,
 	setCurrentPage,
+	setFilters,
 } from '../redux/slices/filterSlice';
+
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
 import Categories from '../components/Categories/';
 import Sort from '../components/Sort';
