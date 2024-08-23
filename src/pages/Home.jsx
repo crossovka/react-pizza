@@ -36,18 +36,15 @@ export default function Home() {
 			const category = activeCategory > 0 ? `&category=${activeCategory}` : '';
 
 			try {
-				// console.log(
-				// 	`Fetching pizzas: page=${currentPage}, category=${category}, sortBy=${sortBy}, search=${search}`
-				// );
 				const response = await axios.get(
 					`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}${search}`
 				);
 				setTotalPages(response.data.meta.total_pages);
 				setPizzas(response.data.items);
 			} catch (error) {
-				console.error('Error fetching the pizzas data', error);
 				setPizzas([]);
 				setTotalPages(1);
+				console.error('Error fetching the pizzas data', error);
 			} finally {
 				setIsLoading(false);
 			}

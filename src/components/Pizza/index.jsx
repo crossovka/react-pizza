@@ -39,7 +39,9 @@ function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
 
 	return (
 		<div className="pizza-block">
-			<img className="pizza-block__image" src={imgUrl} alt="Pizza" />
+			<div className="pizza-block__image -ibg_contain">
+			<img src={imgUrl} alt="Pizza" />
+			</div>
 			{/* <a href='' className="pizza-block__title">{title}</a> */}
 			<Link
 				to={{

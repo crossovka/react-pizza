@@ -6,3 +6,23 @@ $orange: #fe5f1e;
 $container-width: 90%;
 
 $duration: 0.15s;
+
+[class*="-ibg"] {
+	position: relative;
+
+	img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		object-fit: cover;
+		// object-position: center;
+	}
+}
+
+[class*="-ibg_contain"] {
+	img {
+		object-fit: contain;
+	}
+}
