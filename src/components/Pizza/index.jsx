@@ -1,12 +1,32 @@
 import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addProduct } from '../../redux/slices/cartSlice.js';
+
+const pizzaTypes = ['тонкое', 'традиционное'];
 
 function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
-	const pizzaTypes = ['тонкое', 'традиционное'];
+	const dispatch = useDispatch();
+	const cartProduct = useSelector((state) =>
+		state.cartSlice.products.find((obj) => obj.id === id)
+	);
+	const addedCount = cartProduct ? cartProduct.count : 0;
 
 	const [activeType, setActiveType] = useState(types[0]);
 	const [activeSize, setActiveSize] = useState(0);
-	const [pizzaCount, setPizzaCount] = useState(0);
+
+	const onClickAdd = () => {
+		const product = {
+			id,
+			title,
+			price,
+			imgUrl,
+			type: pizzaTypes[activeType],
+			size: sizes[activeSize],
+		};
+		dispatch(addProduct(product));
+	};
 
 	const HandleSizeSelect = useCallback(
 		(i) => {
@@ -60,7 +80,7 @@ function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
 						<span>от {price} ₽</span>
 					</div>
 					<button
-						onClick={() => setPizzaCount(pizzaCount + 1)}
+						onClick={() => onClickAdd()}
 						type="button"
 						className="button button--outline button--add"
 					>
@@ -77,7 +97,8 @@ function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
 							/>
 						</svg>
 						<span>Добавить</span>
-						<i>{pizzaCount}</i>
+						{/* {addedCount > 0 && <i>{addedCount}</i>} */}
+						{addedCount ? <i>{addedCount}</i> : <i>0</i>}
 					</button>
 				</div>
 			</div>

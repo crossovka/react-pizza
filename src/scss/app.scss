@@ -139,6 +139,7 @@ body {
 			align-items: center;
 			gap: 15px;
 		}
+
 		// .cart__item-right
 		&-right {
 			flex: 1 1 auto;
@@ -148,6 +149,7 @@ body {
 		}
 
 		&-info {
+			// flex: 0 0 350px;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -297,8 +299,9 @@ body {
 	}
 
 	&--empty {
+		padding: 40px 0;
 		margin: 0 auto;
-		width: 560px;
+		max-width: 560px;
 		text-align: center;
 
 		h2 {
