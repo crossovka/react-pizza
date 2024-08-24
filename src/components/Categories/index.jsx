@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+	selectFilter,
 	setActiveCategory,
 	setCurrentPage,
 } from '../../redux/slices/filterSlice';
@@ -9,9 +10,7 @@ import CategorySkeleton from './skeleton.jsx';
 
 function Categories() {
 	const dispatch = useDispatch();
-	const activeCategory = useSelector(
-		(state) => state.filterSlice.activeCategory
-	);
+	const activeCategory = useSelector(selectFilter).activeCategory;
 	const categories = [
 		'Все',
 		'Мясные',

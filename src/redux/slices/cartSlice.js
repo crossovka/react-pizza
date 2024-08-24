@@ -78,6 +78,12 @@ const cartSlice = createSlice({
 	},
 });
 
+export const selectCart = (state) => state.cart;
+export const selectCartProductById = (id) => (state) => state.cart.products.find((obj) => obj.id === id);
+// const cartProduct = useSelector((state) =>
+// 	state.cart.products.find((obj) => obj.id === id)
+// );
+
 export const {
 	addProduct,
 	removeProduct,

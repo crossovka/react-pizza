@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveSortType } from '../redux/slices/filterSlice';
+import { selectFilter, setActiveSortType } from '../redux/slices/filterSlice';
 
 const Sort = () => {
 	const dispatch = useDispatch();
-	const sortOptions = useSelector((state) => state.filterSlice.sortOptions);
+	const sortOptions = useSelector(selectFilter).sortOptions;
 	const sortRef = useRef();
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -34,7 +34,8 @@ const Sort = () => {
 
 	useEffect(() => {
 		document.body.addEventListener('click', handleClickOutside, true);
-		return () => document.body.removeEventListener('click', handleClickOutside, true);
+		return () =>
+			document.body.removeEventListener('click', handleClickOutside, true);
 	}, []);
 
 	return (

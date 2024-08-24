@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveCategory, setCurrentPage } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import {
+	selectFilter,
+	setActiveCategory,
+	setCurrentPage,
+} from '../redux/slices/filterSlice';
+import { selectPizzasData, fetchPizzas } from '../redux/slices/pizzasSlice';
 
 import Categories from '../components/Categories/';
 import Sort from '../components/Sort';
@@ -11,17 +15,29 @@ import Pagination from '../components/Pagination';
 
 export default function Home() {
 	const dispatch = useDispatch();
-	const { activeCategory, searchValue, sortOptions, currentPage } = useSelector((state) => state.filterSlice);
-	const { pizzas, status, isLoading, totalPages } = useSelector((state) => state.pizzasSlice);
+	const { activeCategory, searchValue, sortOptions, currentPage } = useSelector(selectFilter);
+	const { pizzas, status, isLoading, totalPages } = useSelector(selectPizzasData);
 
 	const itemsPerPage = 4;
 
 	useEffect(() => {
 		dispatch(
-			fetchPizzas({currentPage,itemsPerPage,activeCategory,sortOptions,searchValue,
+			fetchPizzas({
+				currentPage,
+				itemsPerPage,
+				activeCategory,
+				sortOptions,
+				searchValue,
 			})
 		);
-	}, [dispatch,currentPage,itemsPerPage,activeCategory,sortOptions,searchValue]);
+	}, [
+		dispatch,
+		currentPage,
+		itemsPerPage,
+		activeCategory,
+		sortOptions,
+		searchValue,
+	]);
 
 	const renderPizzas = () => {
 		if (status === 'error') {
