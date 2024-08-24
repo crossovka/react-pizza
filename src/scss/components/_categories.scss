@@ -4,17 +4,14 @@
 	@media (max-width: 767.98px) {
 		overflow: hidden;
 	}
-
+	overflow: hidden;
 	ul {
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		gap: 16px 10px;
+		overflow: auto;
 
-		@media (max-width: 767.98px) {
-			overflow: auto;
-			flex-wrap: nowrap;
-			padding-bottom: 10px;
-		}
+		padding-bottom: 10px;
 
 		li {
 			background-color: #f9f9f9;
