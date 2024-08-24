@@ -27,23 +27,7 @@ body {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
 		justify-items: center;
-		gap: 60px;
-
-		@media (max-width: 1300.98px) {
-			gap: 50px;
-		}
-
-		@media (max-width: 999.98px) {
-			gap: 40px;
-		}
-
-		@media (max-width: 767.98px) {
-			gap: 30px;
-		}
-
-		@media (max-width: 575.98px) {
-			gap: 25px 20px;
-		}
+		gap: 50px 20px;
 	}
 
 	&__top {
