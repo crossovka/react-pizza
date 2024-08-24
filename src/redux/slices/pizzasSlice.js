@@ -3,21 +3,31 @@ import axios from 'axios';
 
 export const fetchPizzas = createAsyncThunk(
 	'pizzas/fetchPizzas',
-	async ({
-		currentPage,
-		itemsPerPage,
-		activeCategory,
-		sortOptions,
-		searchValue,
-	}) => {
+	async (params, thunkAPI) => {
+		const {
+			currentPage,
+			itemsPerPage,
+			activeCategory,
+			sortOptions,
+			searchValue,
+		} = params;
 		const search = searchValue ? `&title=*${searchValue}*` : '';
 		const sortBy = sortOptions.sortProperty;
 		const category = activeCategory > 0 ? `&category=${activeCategory}` : '';
 
-		const { data } = await axios.get(
-			`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}${search}`
-		);
-		return data;
+		try {
+			const { data } = await axios.get(
+				`https://015079367f53b5d9.mokky.dev/pizzas?page=${currentPage}&limit=${itemsPerPage}${category}&sortBy=${sortBy}${search}`
+			);
+
+			if (data.items.length === 0) {
+				return thunkAPI.rejectWithValue('Pizzas empty');
+			}
+
+			return data;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.message);
+		}
 	}
 );
 
@@ -46,13 +56,15 @@ const pizzaSlice = createSlice({
 				state.totalPages = action.payload.meta.total_pages;
 				state.isLoading = false;
 				state.status = 'success';
+				// console.log(action, 'action fulfilled');
 			})
 			.addCase(fetchPizzas.rejected, (state, action) => {
 				state.pizzas = [];
 				state.totalPages = 1;
 				state.isLoading = false;
 				state.status = 'error';
-				state.error = action.error.message;
+				// state.error = action.payload || action.error.message;
+				// console.log(action, 'action rejected');
 			});
 	},
 });
