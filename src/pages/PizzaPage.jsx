@@ -1,16 +1,59 @@
-import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import Layout from './Layout';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
+// import slugify from 'slugify';
+
+import Layout from './Layouts/Layout';
 
 const PizzaPage = () => {
+	const [pizza, setPizza] = useState();
+
 	const { id } = useParams();
-	const location = useLocation();
-	const { title } = location.state || { title: 'Пицца' };
+	const navigate = useNavigate();
+	// const location = useLocation();
+	// console.log(location);
+	// const slug = slugify(title, { lower: true, remove: /[*+~.()'"!:@]/g });
+
+	useEffect(() => {
+		async function fetchPizza() {
+			try {
+				const { data } = await axios.get(
+					`https://015079367f53b5d9.mokky.dev/pizzas?id=${id}`
+				);
+				if (data.length > 0) {
+					setPizza(data[0]);
+				} else {
+					alert('pizza not found');
+					navigate('/not-found');
+				}
+			} catch (error) {
+				alert('error fetching pizza!');
+				navigate('/');
+			}
+		}
+
+		fetchPizza();
+	}, []);
 
 	return (
 		<Layout>
-			<h1>{title}</h1>
-			<p>ID пиццы: {id}</p>
+			{!pizza ? (
+				<h2>Загрузка...</h2>
+			) : (
+				<>
+					<h2>{pizza.title}</h2>
+					<img
+						src={pizza.imgUrl}
+						alt={pizza.title}
+						style={{ width: '200px', height: '200px' }}
+					/>
+					<p>{pizza.description}</p>
+					<span>{pizza.price} ₽</span>
+					<Link to="/" className="button button--outline">
+						Назад
+					</Link>
+				</>
+			)}
 		</Layout>
 	);
 };

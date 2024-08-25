@@ -1,4 +1,4 @@
-import Layout from './Layout';
+import Layout from './Layouts/Layout';
 import NotFoundBlock from '../components/NotFoundBlock';
 
 export default function NotFound() {

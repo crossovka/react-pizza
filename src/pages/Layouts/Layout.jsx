@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../../components/Header';
 
 const Layout = ({ children }) => {
 	return (
@@ -8,7 +8,6 @@ const Layout = ({ children }) => {
 				<main className="content">
 					<div className="container">{children}</div>
 				</main>
-				{/* <Footer /> */}
 			</div>
 		</div>
 	);

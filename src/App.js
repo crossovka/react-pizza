@@ -1,13 +1,13 @@
-import Layout from './pages/Layout';
+import MainLayout from './pages/Layouts/MainLayout';
 import Home from './pages/Home';
 
 import './scss/app.scss';
 
 function App() {
 	return (
-		<Layout>
+		<MainLayout>
 			<Home />
-		</Layout>
+		</MainLayout>
 	);
 }
 

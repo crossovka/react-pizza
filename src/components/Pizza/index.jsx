@@ -2,7 +2,10 @@ import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectCartProductById, addProduct } from '../../redux/slices/cartSlice.js';
+import {
+	selectCartProductById,
+	addProduct,
+} from '../../redux/slices/cartSlice.js';
 
 const pizzaTypes = ['тонкое', 'традиционное'];
 
@@ -37,16 +40,14 @@ function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
 
 	return (
 		<div className="pizza-block">
-			<img className="pizza-block__image" src={imgUrl} alt="Pizza" />
-			{/* <a href='' className="pizza-block__title">{title}</a> */}
 			<Link
 				to={{
 					pathname: `/pizza/${id}`,
-					state: { title },
 				}}
-				className="pizza-block__title"
 			>
-				{title}
+				<img className="pizza-block__image" src={imgUrl} alt="Pizza" />
+				{/* <a href='' className="pizza-block__title">{title}</a> */}
+				<h4 className="pizza-block__title">{title}</h4>
 			</Link>
 			<div>
 				<div className="pizza-block__selector">

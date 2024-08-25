@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import { store } from './redux/store';
 import App from './App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PizzaPage from './pages/PizzaPage';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
