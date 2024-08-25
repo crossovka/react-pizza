@@ -1,9 +1,6 @@
 @import '../variables';
 
 .categories {
-	@media (max-width: 767.98px) {
-		overflow: hidden;
-	}
 	overflow: hidden;
 	ul {
 		display: flex;

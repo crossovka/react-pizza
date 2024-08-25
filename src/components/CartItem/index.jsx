@@ -32,6 +32,12 @@ function CartItem({ id, imgUrl, title, type, size, count, price }) {
 		}
 	};
 
+	// const onClickMinus = () => {
+	// 	if (count > 0) {
+	// 		dispatch(removeCartProduct({ id, type, size }));
+	// 	}
+	// };
+
 	const onClickRemove = () => {
 		if (window.confirm(`Do u want to delete ${title}${type} ${size} см?.`)) {
 			dispatch(removeProduct({ id, type, size }));
