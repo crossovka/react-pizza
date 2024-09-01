@@ -1,10 +1,13 @@
 import Layout from './Layouts/Layout';
 import NotFoundBlock from '../components/NotFoundBlock';
 
-export default function NotFound() {
+const NotFound: React.FC = () => {
 	return (
 		<Layout>
 			<NotFoundBlock />
 		</Layout>
 	);
-}
+};
+
+export default NotFound;
+

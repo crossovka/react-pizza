@@ -2,14 +2,25 @@ import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-	selectCartProductById,
-	addProduct,
-} from '../../redux/slices/cartSlice.js';
+import {addProduct} from '../../redux/slices/cart/slice';
+import { selectCartProductById } from '../../redux/slices/cart/selectors';
+import { CartProduct } from '../../redux/slices/cart/types';
 
-const pizzaTypes = ['тонкое', 'традиционное'];
+import { pizzaTypes } from '../../constants';
 
-function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
+type PizzaProps = {
+	id: number;
+	imgUrl: string;
+	title: string;
+	types: number[];
+	sizes: number[];
+	price: number;
+	category: number;
+	rating: number;
+	description: string;
+};
+
+const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price }) => {
 	const dispatch = useDispatch();
 	const cartProduct = useSelector(selectCartProductById(id));
 	const addedCount = cartProduct ? cartProduct.count : 0;
@@ -18,19 +29,21 @@ function Pizza({ id, imgUrl, title, types, sizes, category, price }) {
 	const [activeSize, setActiveSize] = useState(0);
 
 	const onClickAdd = () => {
-		const product = {
+		const product: CartProduct = {
 			id,
-			title,
-			price,
 			imgUrl,
+			title,
 			type: pizzaTypes[activeType],
 			size: sizes[activeSize],
+			// count? it optional net smislya peredavat`,
+			count: 0,
+			price,
 		};
 		dispatch(addProduct(product));
 	};
 
 	const HandleSizeSelect = useCallback(
-		(i) => {
+		(i: number) => {
 			if (activeSize !== i) {
 				setActiveSize(i);
 			}

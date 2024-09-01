@@ -1,34 +1,38 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import debounce from 'lodash.debounce';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setSearchValue } from '../../redux/slices/filterSlice';
+import { setSearchValue } from '../../redux/slices/filter/slice';
+import { selectSearchValue } from '../../redux/slices/filter/selectors';
 
 import searchIcon from '../../assets/img/search.svg';
 import clearIcon from '../../assets/img/cansel.svg';
 import styles from './Search.module.scss';
 
-export const Search = () => {
+export const Search: React.FC = () => {
 	const dispatch = useDispatch();
-	const searchValue = useSelector(selectFilter).searchValue;
-	const inputRef = useRef();
-	const [localSearchValue, setLocalSearchValue] = useState(searchValue);
+	const searchValue: string = useSelector(selectSearchValue);
+	const inputRef = useRef<HTMLInputElement>(null);
+	const [localSearchValue, setLocalSearchValue] = useState<string>(searchValue);
 
 	const debouncedSetSearchValue = useCallback(
-		debounce((str) => dispatch(setSearchValue(str)), 700),
-		[dispatch]
+		debounce((str) => dispatch(setSearchValue(str)), 600),[dispatch]
 	);
 
-	const handleInputChange = (e) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const value = e.target.value;
 		setLocalSearchValue(value);
 		debouncedSetSearchValue(value);
 	};
 
-	const handleClearSearch = () => {
+	/**
+	 * Cancels the current search query and clears the input field then focuses on it.
+	 */
+	const handleSearchClear = (): void => {
 		setLocalSearchValue('');
 		dispatch(setSearchValue(''));
 		debouncedSetSearchValue.cancel();
-		inputRef.current.focus();
+		inputRef.current?.focus();
 	};
 
 	useEffect(() => {
@@ -47,7 +51,7 @@ export const Search = () => {
 			/>
 			{localSearchValue && (
 				<img
-					onClick={handleClearSearch}
+					onClick={handleSearchClear}
 					className={styles.clearIcon}
 					src={clearIcon}
 					alt="Очистить поле поиска"

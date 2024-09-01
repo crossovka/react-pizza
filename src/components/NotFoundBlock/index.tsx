@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import notFound from '../../assets/img/notFound.svg';
 import styles from './NotFoundBlock.module.scss';
 
-const NotFoundBlock = () => {
+const NotFoundBlock: React.FC = () => {
 	return (
 		<div className={styles['not-found']}>
 			<h1 className={styles['not-found__title']}>Page not found</h1>

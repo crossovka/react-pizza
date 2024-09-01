@@ -1,16 +1,19 @@
 import { useLocation, Link } from 'react-router-dom';
-import { Search } from './Search';
-import { useSelector } from 'react-redux';
-import { selectCart } from '../redux/slices/cartSlice';
 
+import { useSelector } from 'react-redux';
+import { selectCart } from '../redux/slices/cart/selectors';
+
+import Search from './Search';
 import logo from '../assets/img/pizza-logo.svg';
 
 function Header() {
 	const { products, totalPrice } = useSelector(selectCart);
 
-	const totalCount = products.reduce((sum, item) => sum + item.count, 0);
-
 	const { pathname } = useLocation();
+
+	const totalCount = products.reduce(
+		(sum: number, item: any) => sum + item.count,0
+	);
 
 	return (
 		<header className="header">

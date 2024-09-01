@@ -1,33 +1,39 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilter, setActiveSortType } from '../redux/slices/filterSlice';
+
+import { setActiveSortType } from '../redux/slices/filter/slice';
+import { selectSortOption } from '../redux/slices/filter/selectors';
+import { SortItemType } from '../redux/slices/filter/types';
+
+import { sortList } from '../constants';
 
 const Sort = () => {
 	const dispatch = useDispatch();
-	const sortOptions = useSelector(selectFilter).sortOptions;
-	const sortRef = useRef();
+	const sortOption: SortItemType = useSelector(selectSortOption);
+
+	const sortRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useState(false);
 
-	const options = [
-		{ name: 'популярности (Desc)', sortProperty: '-rating' },
-		{ name: 'цене (Asc)', sortProperty: 'price' },
-		{ name: 'цене (Desc)', sortProperty: '-price' },
-		{ name: 'алфавиту (Asc)', sortProperty: 'title' },
-		{ name: 'алфавиту (Desc)', sortProperty: '-title' },
-	];
-
-	const handleSelect = (sortProperty) => {
-		if (sortOptions.sortProperty !== sortProperty) {
-			const selectedOption = options.find(
+	const handleSelectSort = (sortProperty: string): void => {
+		if (sortOption.sortProperty !== sortProperty) {
+			const selectedOption = sortList.find(
 				(option) => option.sortProperty === sortProperty
 			);
+			// if (selectedOption) {
+			// 	dispatch(setActiveSortType(selectedOption));
+			// }
 			dispatch(setActiveSortType(selectedOption));
 			setIsOpen(false);
 		}
 	};
 
-	const handleClickOutside = (e) => {
-		if (sortRef.current && !sortRef.current.contains(e.target)) {
+	/**
+	 * Handles a click outside of the sort dropdown menu.
+	 *
+	 * @param e The event to process.
+	 */
+	const handleClickOutside = (e: MouseEvent): void => {
+		if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
 			setIsOpen(false);
 		}
 	};
@@ -56,17 +62,15 @@ const Sort = () => {
 				</svg>
 				<b>Сортировка по:</b>
 				<div className="sort__popup-wrap">
-					<span onClick={() => setIsOpen(!isOpen)}>{sortOptions.name}</span>
+					<span onClick={() => setIsOpen(!isOpen)}>{sortOption.name}</span>
 					<div className={`sort__popup ${isOpen ? 'active' : ''}`}>
 						<ul>
-							{options.map((obj) => (
+							{sortList.map((obj) => (
 								<li
 									key={obj.sortProperty}
-									onClick={() => handleSelect(obj.sortProperty)}
+									onClick={() => handleSelectSort(obj.sortProperty)}
 									className={
-										sortOptions.sortProperty === obj.sortProperty
-											? 'active'
-											: ''
+										sortOption.sortProperty === obj.sortProperty ? 'active' : ''
 									}
 								>
 									{obj.name}

@@ -1,12 +1,22 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 // import slugify from 'slugify';
 
 import Layout from './Layouts/Layout';
 
-const PizzaPage = () => {
-	const [pizza, setPizza] = useState();
+const PizzaPage: React.FC = () => {
+	const [pizza, setPizza] = useState<{
+		id: number;
+		imgUrl: string;
+		title: string;
+		description: string;
+		price: number;
+		types: number[];
+		sizes: number[];
+		category: number;
+		rating: number;
+	}>();
 
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -34,7 +44,7 @@ const PizzaPage = () => {
 
 		fetchPizza();
 	}, []);
-
+	
 	return (
 		<Layout>
 			{!pizza ? (
