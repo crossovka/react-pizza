@@ -1,3 +1,5 @@
+import { SortPropertyEnum } from "../filter/types";
+
 export type Pizza = {
 	id: number;
 	imgUrl: string;
@@ -22,6 +24,25 @@ export interface PizzaSliceState {
 	isLoading: boolean;
 	itemsPerPage: number;
 	totalPages: number;
-	error: null | string;
 	status: Status;
 }
+
+export interface FetchPizzasArgs {
+	currentPage: number;
+	itemsPerPage: number;
+	activeCategory: number;
+	// FIX name то тоже передаётся почему-то
+	sortOption: { sortProperty: SortPropertyEnum };
+	searchValue?: string;
+}
+
+// interface FetchPizzasResponse {
+//   items: Pizza[];
+//   meta: {
+//     total_items: number;
+//     total_pages: number;
+//     current_page: number;
+//     per_page: number;
+//     remaining_count: number;
+//   };
+// }

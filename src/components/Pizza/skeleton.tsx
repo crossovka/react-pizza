@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-const PizzaSkeleton = () => (
+const PizzaSkeleton: React.FC = () => (
 	<ContentLoader
 		viewBox="0 0 280 490"
 		height={490}
