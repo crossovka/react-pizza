@@ -1,5 +1,5 @@
-import React from 'react';
 import { usePizzas } from '../hooks/usePizzas';
+
 import Categories from '../components/Categories/index.js';
 import Sort from '../components/Sort.js';
 import Pagination from '../components/Pagination/index.js';

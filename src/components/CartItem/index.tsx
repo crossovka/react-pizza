@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
+
 import { addProduct, removeCartProduct, removeProduct } from '../../redux/slices/cart/slice';
 
 type CartItemProps = {
@@ -12,7 +13,7 @@ type CartItemProps = {
 };
 
 const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, count, price }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onClickPlus = () => {
 		dispatch(
@@ -25,24 +26,8 @@ const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, coun
 	};
 
 	const onClickMinus = () => {
-		if (count === 1) {
-			if (
-				window.confirm(
-					`Количество достигло 0. Вы хотите удалить ${title}? ${type} ${size} см. ?`
-				)
-			) {
-				dispatch(removeProduct({ id, type, size }));
-			}
-		} else {
-			dispatch(removeCartProduct({ id, type, size }));
-		}
+		dispatch(removeCartProduct({ id, type, size }));
 	};
-
-	// const onClickMinus = () => {
-	// 	if (count > 0) {
-	// 		dispatch(removeCartProduct({ id, type, size }));
-	// 	}
-	// };
 
 	const onClickRemove = () => {
 		if (window.confirm(`Do u want to delete ${title}${type} ${size} см?.`)) {
@@ -66,6 +51,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, coun
 			<div className="cart__item-right">
 				<div className="cart__item-count">
 					<button
+						disabled={count === 1}
 						onClick={onClickMinus}
 						type="button"
 						aria-label="remove one more pizza"

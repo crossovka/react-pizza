@@ -190,6 +190,24 @@ body {
 			justify-content: space-between;
 			gap: 12px;
 
+			button{
+				&[disabled] {
+					opacity: 0.3;
+					cursor: not-allowed;
+					@media (any-hover: hover){
+						&:hover{
+							transform: none;
+							background: none;
+							svg{
+								path{
+									fill: $orange;
+								}
+							}
+						}
+					}
+				}
+			}
+
 			&-minus {
 				svg {
 					path:first-of-type {
@@ -254,9 +272,12 @@ body {
 
 		&-details {
 			display: flex;
+			gap: 15px;
+			flex-wrap: wrap;
 			justify-content: space-between;
 
 			span {
+				text-wrap: nowrap;
 				font-size: 22px;
 
 				&:last-of-type {
@@ -269,6 +290,8 @@ body {
 
 		&-buttons {
 			display: flex;
+			gap: 15px;
+			flex-wrap: wrap;
 			justify-content: space-between;
 			margin-top: 40px;
 

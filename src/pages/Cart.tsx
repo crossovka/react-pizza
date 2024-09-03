@@ -104,7 +104,7 @@ const Cart: React.FC = () => {
 					</div>
 				)}
 				<div className="cart__items">
-					{products.map((product: any) => (
+					{products.map((product: CartProduct[]) => (
 						<CartItem
 							key={`${product.id}-${product.type}-${product.size}`}
 							{...product}
