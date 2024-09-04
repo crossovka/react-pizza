@@ -27,17 +27,15 @@ export const usePizzas = () => {
 
 	const handleCategorySelect = useCallback(
 		(i: number) => {
-			if (activeCategory !== i) {
-				dispatch(setActiveCategory(i));
-				dispatch(setCurrentPage(1));
-			}
+			dispatch(setActiveCategory(i));
+			dispatch(setCurrentPage(1));
 		},
-		[activeCategory, dispatch]
+		[]
 	);
 
-	const handlePageChange = (page: number) => {
+	const handlePageChange = useCallback((page: number) => {
 		dispatch(setCurrentPage(page));
-	};
+	}, []);
 
 	const renderPizzas = (): JSX.Element[] => {
 		if (status === 'error') {
@@ -63,5 +61,5 @@ export const usePizzas = () => {
 		));
 	};
 
-	return {renderPizzas, totalPages, currentPage, activeCategory, handleCategorySelect, handlePageChange,};
+	return {renderPizzas, totalPages, currentPage, activeCategory, sortOption, handleCategorySelect, handlePageChange,};
 };

@@ -1,27 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { memo, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { setActiveSortType } from '../redux/slices/filter/slice';
-import { selectSortOption } from '../redux/slices/filter/selectors';
-import { SortItemType } from '../redux/slices/filter/types';
+import { SortItemType, SortPropertyEnum } from '../redux/slices/filter/types';
 
 import { sortList } from '../constants';
 
-const Sort = () => {
-	const dispatch = useDispatch();
-	const sortOption: SortItemType = useSelector(selectSortOption);
+type SortProps = {
+	sortOption: SortItemType;
+};
 
+// React.memo can be superfluous | unnecessary ??
+const Sort: React.FC<SortProps> = memo(({ sortOption }) => {
+	const dispatch = useDispatch();
 	const sortRef = useRef<HTMLDivElement>(null);
+
 	const [isOpen, setIsOpen] = useState(false);
 
-	const handleSelectSort = (sortProperty: string): void => {
-		if (sortOption.sortProperty !== sortProperty) {
-			const selectedOption = sortList.find(
-				(option) => option.sortProperty === sortProperty
-			);
-			// if (selectedOption) {
-			// 	dispatch(setActiveSortType(selectedOption));
-			// }
+	const handleSelectSort = (sortProperty: SortPropertyEnum): void => {
+		const selectedOption = sortList.find(
+			(option) => option.sortProperty === sortProperty
+		);
+		if (selectedOption) {
 			dispatch(setActiveSortType(selectedOption));
 			setIsOpen(false);
 		}
@@ -65,7 +65,7 @@ const Sort = () => {
 					<span onClick={() => setIsOpen(!isOpen)}>{sortOption.name}</span>
 					<div className={`sort__popup ${isOpen ? 'active' : ''}`}>
 						<ul>
-							{sortList.map((obj) => (
+							{sortList.map((obj: SortItemType) => (
 								<li
 									key={obj.sortProperty}
 									onClick={() => handleSelectSort(obj.sortProperty)}
@@ -82,6 +82,6 @@ const Sort = () => {
 			</div>
 		</div>
 	);
-};
+});
 
 export default Sort;

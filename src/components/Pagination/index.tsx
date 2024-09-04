@@ -1,4 +1,6 @@
+import { memo } from 'react';
 import ReactPaginate from 'react-paginate';
+
 import styles from './Pagination.module.scss';
 
 type PaginationProps = {
@@ -7,7 +9,10 @@ type PaginationProps = {
 	currentPage: number;
 };
 
-const Pagination: React.FC<PaginationProps> = ({ onChangePage, totalPages, currentPage }) => (
+const Pagination: React.FC<PaginationProps> = memo (({ onChangePage, totalPages, currentPage }) => {
+	// useWhyDidYouUpdate('Pagination', { onChangePage, totalPages, currentPage });
+
+	return (
 		<ReactPaginate
 			className={styles.root}
 			breakLabel="..."
@@ -19,6 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({ onChangePage, totalPages, curre
 			pageCount={totalPages}
 			forcePage={currentPage - 1}
 		/>
-);
+	);
+});
 
 export default Pagination;

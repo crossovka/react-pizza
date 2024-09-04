@@ -9,7 +9,7 @@ const mainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 			<div className="wrapper">
 				<Header />
 				<main className="content">
-					<div className="container">{children}</div>
+					{children}
 				</main>
 				<Footer />
 			</div>

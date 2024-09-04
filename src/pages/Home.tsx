@@ -7,17 +7,17 @@ import Pagination from '../components/Pagination/index.js';
 import { pizzasCategories } from '../constants';
 
 const Home: React.FC = function () {
-	const {renderPizzas, totalPages, currentPage, activeCategory, handleCategorySelect, handlePageChange,} = usePizzas();
+	const {renderPizzas, totalPages, currentPage, activeCategory, sortOption, handleCategorySelect, handlePageChange,} = usePizzas();
 
 	return (
-		<>
+		<div className="container">
 			<div className="content__top">
 				<Categories
 					categories={pizzasCategories}
 					activeCategory={activeCategory}
 					onCategorySelect={handleCategorySelect}
 				/>
-				<Sort />
+				<Sort sortOption={sortOption}/>
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">{renderPizzas()}</div>
@@ -28,7 +28,7 @@ const Home: React.FC = function () {
 					currentPage={currentPage}
 				/>
 			)}
-		</>
+		</div>
 	);
 };
 

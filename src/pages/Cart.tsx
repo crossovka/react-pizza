@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { clearProducts } from '../redux/slices/cart/slice';
 import { selectCart } from '../redux/slices/cart/selectors';
+import { CartProduct } from '../redux/slices/cart/types';
 
 import Layout from './Layouts/Layout';
 import CartItem from '../components/CartItem';
@@ -21,6 +22,7 @@ const Cart: React.FC = () => {
 	};
 
 	return (
+		// <div className="container container--cart"></div>
 		<Layout>
 			<div className="cart">
 				{totalPrice > 0 && (
@@ -104,10 +106,16 @@ const Cart: React.FC = () => {
 					</div>
 				)}
 				<div className="cart__items">
-					{products.map((product: CartProduct[]) => (
+					{products.map((product: CartProduct) => (
 						<CartItem
 							key={`${product.id}-${product.type}-${product.size}`}
-							{...product}
+							id={product.id}
+							imgUrl={product.imgUrl}
+							title={product.title}
+							type={product.type}
+							size={product.size}
+							count={product.count}
+							price={product.price}
 						/>
 					))}
 					{!totalPrice && <CartEmpty />}

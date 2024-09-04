@@ -1,10 +1,14 @@
+import { memo } from 'react';
+
 type CategoryProps = {
 	categories: string[];
 	activeCategory: number;
 	onCategorySelect: (i: number) => void;
 };
 
-const Categories: React.FC<CategoryProps> = ({ categories, activeCategory, onCategorySelect }) => {
+const Categories: React.FC<CategoryProps> = memo(({ categories, activeCategory, onCategorySelect }) => {
+	// useWhyDidYouUpdate('Categories', { categories, activeCategory, onCategorySelect});
+	
 	return (
 		<div className="categories">
 			<ul>
@@ -20,6 +24,7 @@ const Categories: React.FC<CategoryProps> = ({ categories, activeCategory, onCat
 			</ul>
 		</div>
 	);
-};
+}
+);
 
 export default Categories;
