@@ -3,11 +3,15 @@ import { CartProduct, CartSliceState } from './types';
 
 import { findCartProduct } from '../../../utils/findCartProduct';
 import { calculateTotalPrice } from '../../../utils/calcTotalPrice';
+import { getCartFromLS } from '../../../utils/getCartFromLS';
 
+const {products, totalPrice} = getCartFromLS();
+
+// const initialState: CartSliceState = getCartFromLS();
 const initialState: CartSliceState = {
-	totalPrice: 0,
-	products: [],
-};
+	products,
+	totalPrice,
+}
 
 const cartSlice = createSlice({
 	name: 'cart',

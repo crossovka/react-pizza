@@ -109,8 +109,8 @@ const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price })
 							/>
 						</svg>
 						<span>Добавить</span>
-						{/* {addedCount > 0 && <i>{addedCount}</i>} */}
-						{addedCount ? <i>{addedCount}</i> : <i>0</i>}
+						{addedCount > 0 && <i>{addedCount}</i>}
+						{/* {addedCount ? <i>{addedCount}</i> : <i>0</i>} */}
 					</button>
 				</div>
 			</div>
