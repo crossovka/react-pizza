@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {addProduct} from '../../redux/slices/cart/slice';
-import { selectCartProductById } from '../../redux/slices/cart/selectors';
+import { selectCartProductsById } from '../../redux/slices/cart/selectors';
 import { CartProduct } from '../../redux/slices/cart/types';
 
 import { pizzaTypes } from '../../constants';
@@ -22,11 +22,17 @@ type PizzaProps = {
 
 const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price }) => {
 	const dispatch = useDispatch();
-	const cartProduct = useSelector(selectCartProductById(id));
-	const addedCount = cartProduct ? cartProduct.count : 0;
-
+	
 	const [activeType, setActiveType] = useState(types[0]);
 	const [activeSize, setActiveSize] = useState(0);
+
+	// const cartProducts = useSelector((state: RootState) =>
+	// 	state.cart.products.filter((obj: CartProduct) => obj.id === id)
+	// );
+
+	const cartProducts = useSelector(selectCartProductsById(id));
+	
+	const addedCount = cartProducts.reduce((sum: number, product: CartProduct) => sum + product.count, 0);
 	
 	const onClickAdd = () => {
 		const product: CartProduct = {
