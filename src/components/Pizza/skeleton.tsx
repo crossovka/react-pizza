@@ -6,8 +6,8 @@ const PizzaSkeleton: React.FC = () => (
 		height={490}
 		width={280}
 		speed={2}
-		primarycolor="#f3f3f3"
-		secondarycolor="#ecebeb"
+		backgroundColor="#f3f3f3"
+		foregroundColor="#ecebeb"
 	>
 		<circle cx="134 " cy="136 " r="125 " />
 		<rect x="0" y="296" rx="10" ry="10" width="280" height="24" />

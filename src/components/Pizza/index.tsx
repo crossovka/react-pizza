@@ -27,7 +27,7 @@ const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price })
 
 	const [activeType, setActiveType] = useState(types[0]);
 	const [activeSize, setActiveSize] = useState(0);
-
+	
 	const onClickAdd = () => {
 		const product: CartProduct = {
 			id,
@@ -35,21 +35,27 @@ const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price })
 			title,
 			type: pizzaTypes[activeType],
 			size: sizes[activeSize],
-			// count? it optional net smislya peredavat`,
-			count: 0,
+			// count? it optional net smislya peredavat` ибо он есть в редакс уже,
+			count: 1,
 			price,
 		};
 		dispatch(addProduct(product));
 	};
 
-	const HandleSizeSelect = useCallback(
-		(i: number) => {
-			if (activeSize !== i) {
-				setActiveSize(i);
-			}
-		},
-		[activeSize]
-	);
+	// calback избыточный? если зависимость актив сайз обновляется при каждом вызове ?
+	// const HandleSizeSelect = useCallback(
+	// 	(i: number) => {
+	// 		if (activeSize !== i) {
+	// 			setActiveSize(i);
+	// 		}
+	// 	},
+	// 	[activeSize]
+	// );
+	const HandleSizeSelect = useCallback((i: number) => {
+		if (activeSize !== i) {
+			setActiveSize(i);
+		}
+	}, [activeSize]);
 
 	return (
 		<div className="pizza-block">
@@ -62,7 +68,7 @@ const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price })
 				{/* <a href='' className="pizza-block__title">{title}</a> */}
 				<h4 className="pizza-block__title">{title}</h4>
 			</Link>
-			<div>
+			<div className='pizza-block__wrap'>
 				<div className="pizza-block__selector">
 					<ul>
 						{types.map((typeI) => (

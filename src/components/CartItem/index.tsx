@@ -1,7 +1,9 @@
 import { useAppDispatch } from '../../redux/store';
 
 import { addProduct, removeCartProduct, removeProduct } from '../../redux/slices/cart/slice';
+import { CartProduct } from '../../redux/slices/cart/types';
 
+// пропсы зачем если это равно Cartitem
 type CartItemProps = {
 	id: number;
 	imgUrl: string;
@@ -16,22 +18,16 @@ const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, coun
 	const dispatch = useAppDispatch();
 
 	const onClickPlus = () => {
-		dispatch(
-			addProduct({
-				id,
-				type,
-				size,
-			})
-		);
+		dispatch(addProduct({ id, type, size } as CartProduct));
 	};
 
 	const onClickMinus = () => {
-		dispatch(removeCartProduct({ id, type, size }));
+		dispatch(removeCartProduct({ id, type, size } as CartProduct));
 	};
 
 	const onClickRemove = () => {
-		if (window.confirm(`Do u want to delete ${title}${type} ${size} см?.`)) {
-			dispatch(removeProduct({ id, type, size }));
+		if (window.confirm(`Do you want to delete ${title} (${type}, ${size} см)?`)) {
+			dispatch(removeProduct({ id, type, size } as CartProduct));
 		}
 	};
 

@@ -10,7 +10,8 @@ import NotFound from './pages/NotFound';
 import DevErrorPage from './pages/ErrorPageDev';
 import ProdErrorPage from './pages/ErrorPageProd';
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+// const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = import.meta.env.MODE === 'development'; // Vite
 const ErrorPage = isDevelopment ? DevErrorPage : ProdErrorPage;
 
 const router = createBrowserRouter([
@@ -48,7 +49,7 @@ if (rootEl) {
 }
 
 {
-/* <React.StrictMode>
+	/* <React.StrictMode>
 	<RouterProvider router={router} />
 </React.StrictMode> */
 }

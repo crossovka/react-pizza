@@ -1,7 +1,7 @@
 import { useRouteError } from 'react-router-dom';
 
-export default function DevErrorPage() {
-	const error = useRouteError();
+const DevErrorPage: React.FC = function () {
+	const error = useRouteError() as { statusText?: string; message?: string };
 	console.error(error);
 
 	return (
@@ -13,4 +13,6 @@ export default function DevErrorPage() {
 			</p>
 		</div>
 	);
-}
+};
+
+export default DevErrorPage;

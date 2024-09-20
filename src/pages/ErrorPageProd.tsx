@@ -1,7 +1,7 @@
 import { useRouteError } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export default function ProdErrorPage() {
+const ProdErrorPage: React.FC = function () {
 	const error = useRouteError();
 	console.error(error);
 
@@ -14,4 +14,6 @@ export default function ProdErrorPage() {
 			</Link>
 		</div>
 	);
-}
+};
+
+export default ProdErrorPage;
