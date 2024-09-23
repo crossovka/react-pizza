@@ -1,21 +1,33 @@
-```markdown
-# README
+# React Pizza
 
 ## Оглавление
 
-1. [Описание проекта](#описание-проекта)
-2. [Технологический стек](#технологический-стек)
-3. [Установка и настройка](#установка-и-настройка)
-4. [Основные функции](#основные-функции)
-5. [Структура проекта](#структура-проекта)
-6. [Запуск проекта](#запуск-проекта)
-7. [Контакты](#контакты)
+- [React Pizza](#react-pizza)
+	- [Оглавление](#оглавление)
+	- [Описание проекта](#описание-проекта)
+	- [Технологический стек](#технологический-стек)
+	- [Установка и настройка](#установка-и-настройка)
+	- [Основные функции](#основные-функции)
+	- [Структура проекта](#структура-проекта)
+	- [Запуск проекта](#запуск-проекта)
+	- [Контакты](#контакты)
+- [README](#readme)
+	- [Table of Contents](#table-of-contents)
+	- [Project Description](#project-description)
+	- [Technology Stack](#technology-stack)
+	- [Installation and Setup](#installation-and-setup)
+	- [Main Features](#main-features)
+	- [Project Structure](#project-structure)
+	- [Running the Project](#running-the-project)
+	- [Contacts](#contacts)
 
 ---
 
 ## Описание проекта
 
 Данный проект представляет собой веб-приложение для заказа пиццы, где пользователи могут выбирать различные виды пицц, фильтровать их по категориям, сортировать по популярности и цене, а также добавлять в корзину для оформления заказа. Приложение также поддерживает пагинацию, анимации загрузки и адаптивный дизайн для различных устройств.
+
+Проект построен с использованием современных методов разработки, включая компоненты на React, управление состоянием через Redux и асинхронные операции с использованием Redux Toolkit. Код организован по принципам чистой архитектуры, что облегчает его поддержку и расширение.
 
 ---
 
@@ -39,7 +51,7 @@
 
 1. Склонируйте репозиторий:
    ```bash
-   git clone https://github.com/ваш-репозиторий.git
+   git clone https://github.com/crossovka/react-pizza
    ```
 2. Перейдите в директорию проекта:
    ```bash
@@ -96,10 +108,11 @@
 
 ## Контакты
 
-Если у вас возникли вопросы или предложения по проекту, вы можете связаться со мной:
+Если у вас возникли вопросы или предложения по проекту, вы можете связаться со мной или оставить issue на GitHub:
 
-- **Email**: your.email@example.com
-- **GitHub**: [https://github.com/ваш-профиль](https://github.com/ваш-профиль)
+- **Telegram**: @comunay
+- **GitHub**: [https://github.com/crossovka](https://github.com/crossovka)
+- **Email**: [cevyacheslav@gmail.com](mailto:cevyacheslav@gmail.com) (обновите на свой реальный email)
 
 ---
 
@@ -107,6 +120,15 @@
 
 ## Table of Contents
 
+- [React Pizza](#react-pizza)
+	- [Оглавление](#оглавление)
+	- [Описание проекта](#описание-проекта)
+	- [Технологический стек](#технологический-стек)
+	- [Установка и настройка](#установка-и-настройка)
+	- [Основные функции](#основные-функции)
+	- [Структура проекта](#структура-проекта)
+	- [Запуск проекта](#запуск-проекта)
+	- [Контакты](#контакты)
 - [README](#readme)
 	- [Table of Contents](#table-of-contents)
 	- [Project Description](#project-description)
@@ -122,6 +144,8 @@
 ## Project Description
 
 This project is a web application for ordering pizza, where users can choose various types of pizzas, filter them by categories, sort them by popularity and price, and add them to a cart for checkout. The application also supports pagination, loading animations, and responsive design for various devices.
+
+The project is built using modern development practices, including React components, state management with Redux, and asynchronous operations using Redux Toolkit. The code is organized following clean architecture principles, making it easier to maintain and extend.
 
 ---
 
@@ -145,7 +169,7 @@ The project is built using modern technologies:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repository.git
+   git clone https://github.com/crossovka/react-pizza
    ```
 2. Navigate to the project directory:
    ```bash
@@ -204,8 +228,8 @@ To run the project in production mode, follow these steps:
 
 If you have any questions or suggestions about the project, feel free to contact me:
 
-- **Email**: your.email@example.com
-- **GitHub**: [https://github.com/your-profile](https://github.com/your-profile)
+- **Telegram**: @comunay
+- **GitHub**: [https://github.com/crossovka](https://github.com/crossovka)
+- **Email**: [cevyacheslav@gmail.com](mailto:cevyacheslav@gmail.com) (update with your actual email)
 
 ---
-```
