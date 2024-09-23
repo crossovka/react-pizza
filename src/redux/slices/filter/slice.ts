@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FilterSliceState, SortItemType, SortPropertyEnum } from './types';
+import { FilterSliceState, SortItemType } from './types';
 
 import {sortList} from '../../../constants/';
 
@@ -7,7 +7,7 @@ const initialState: FilterSliceState = {
 	activeCategory: 0,
 	searchValue: '',
 	// sortOption: { name: 'популярности (Asc)', sortProperty: SortPropertyEnum.RATING_ASC },
-	sortOption: sortList[0],
+	sortOption: sortList[0] as SortItemType,
 	currentPage: 1,
 };
 
