@@ -8,8 +8,7 @@ import { selectPizzasData } from '../redux/slices/pizzas/selectors';
 import { fetchPizzas } from '../redux/slices/pizzas/asyncActions';
 import { Pizza as PizzaType } from '../redux/slices/pizzas/types';
 
-import PizzaSkeleton from '../components/Pizza/skeleton';
-import Pizza from '../components/Pizza';
+import { PizzaSkeleton, Pizza } from '../components';
 
 export const usePizzas = () => {
 	// const dispatch = useDispatch();
@@ -51,13 +50,12 @@ export const usePizzas = () => {
 		}
 
 		if (isLoading) {
-			return [...new Array(itemsPerPage)].map((_, i) => (
-				<PizzaSkeleton key={i} />
-			));
+			return [...Array(itemsPerPage)].map((_, i) => <PizzaSkeleton key={i} />);
 		}
 
 		return pizzas.map((pizza: PizzaType) => (
 			<Pizza key={pizza.id} {...pizza} />
+			
 		));
 	};
 

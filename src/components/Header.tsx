@@ -17,13 +17,12 @@ const Header: React.FC = () => {
 	const isMounted = useRef(false);
 
 	useEffect(() => {
-		if (isMounted.current) {
-			const json = JSON.stringify(products);
-			localStorage.setItem('cart', json);
+		if (isMounted.current && products.length) {
+				const json = JSON.stringify(products);
+				localStorage.setItem('cart', json);
 		}
-		
 		isMounted.current = true;
-	},[products])
+}, [products]);
 
 	return (
 		<header className="header">

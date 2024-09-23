@@ -9,7 +9,7 @@ type PaginationProps = {
 	currentPage: number;
 };
 
-const Pagination: React.FC<PaginationProps> = memo (({ onChangePage, totalPages, currentPage }) => {
+export const Pagination: React.FC<PaginationProps> = memo (({ onChangePage, totalPages, currentPage }) => {
 	// useWhyDidYouUpdate('Pagination', { onChangePage, totalPages, currentPage });
 
 	return (
@@ -26,5 +26,3 @@ const Pagination: React.FC<PaginationProps> = memo (({ onChangePage, totalPages,
 		/>
 	);
 });
-
-export default Pagination;

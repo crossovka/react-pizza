@@ -1,5 +1,6 @@
-import { useAppDispatch } from '../../redux/store';
+import { Link } from 'react-router-dom';
 
+import { useAppDispatch } from '../../redux/store';
 import { addProduct, removeCartProduct, removeProduct } from '../../redux/slices/cart/slice';
 import { CartProduct } from '../../redux/slices/cart/types';
 
@@ -14,7 +15,7 @@ type CartItemProps = {
 	price: number;
 };
 
-const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, count, price }) => {
+export const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, count, price }) => {
 	const dispatch = useAppDispatch();
 
 	const onClickPlus = () => {
@@ -33,17 +34,19 @@ const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, coun
 
 	return (
 		<div className="cart__item">
-			<div className="cart__item-left">
-				<div className="cart__item-img">
-					<img className="pizza-block__image" src={imgUrl} alt={title} />
+			<Link to={{pathname: `/pizza/${id}`}}>
+				<div className="cart__item-left">
+					<div className="cart__item-img">
+						<img className="pizza-block__image" src={imgUrl} alt={title} />
+					</div>
+					<div className="cart__item-info">
+						<h3>{title}</h3>
+						<p>
+							{type}, {size} см.
+						</p>
+					</div>
 				</div>
-				<div className="cart__item-info">
-					<h3>{title}</h3>
-					<p>
-						{type}, {size} см.
-					</p>
-				</div>
-			</div>
+			</Link>
 			<div className="cart__item-right">
 				<div className="cart__item-count">
 					<button
@@ -127,4 +130,3 @@ const CartItem: React.FC<CartItemProps> = ({ id, imgUrl, title, type, size, coun
 		</div>
 	);
 }
-export default CartItem;

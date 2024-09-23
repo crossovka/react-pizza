@@ -7,6 +7,7 @@ import { selectCartProductsById } from '../../redux/slices/cart/selectors';
 import { CartProduct } from '../../redux/slices/cart/types';
 
 import { pizzaTypes } from '../../constants';
+import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 
 type PizzaProps = {
 	id: number;
@@ -20,15 +21,13 @@ type PizzaProps = {
 	description: string;
 };
 
-const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price }) => {
+export const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price }) => {
+// export const Pizza: React.FC<PizzaProps> = React.memo(({ id, imgUrl, title, types, sizes, price }) => {});
+	useWhyDidYouUpdate('Pizza', { id, imgUrl, title, types, sizes, price });
 	const dispatch = useDispatch();
 	
 	const [activeType, setActiveType] = useState(types[0]);
 	const [activeSize, setActiveSize] = useState(0);
-
-	// const cartProducts = useSelector((state: RootState) =>
-	// 	state.cart.products.filter((obj: CartProduct) => obj.id === id)
-	// );
 
 	const cartProducts = useSelector(selectCartProductsById(id));
 	
@@ -49,19 +48,16 @@ const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price })
 	};
 
 	// calback избыточный? если зависимость актив сайз обновляется при каждом вызове ?
-	// const HandleSizeSelect = useCallback(
-	// 	(i: number) => {
-	// 		if (activeSize !== i) {
-	// 			setActiveSize(i);
-	// 		}
-	// 	},
-	// 	[activeSize]
-	// );
-	const HandleSizeSelect = useCallback((i: number) => {
+	const HandleSizeSelect = (i: number) => {
 		if (activeSize !== i) {
 			setActiveSize(i);
 		}
-	}, [activeSize]);
+	};
+	// const HandleSizeSelect = useCallback((i: number) => {
+	// 	if (activeSize !== i) {
+	// 		setActiveSize(i);
+	// 	}
+	// }, [activeSize]);
 
 	return (
 		<div className="pizza-block">
@@ -122,12 +118,9 @@ const Pizza: React.FC<PizzaProps> = ({ id, imgUrl, title, types, sizes, price })
 						</svg>
 						<span>Добавить</span>
 						{addedCount > 0 && <i>{addedCount}</i>}
-						{/* {addedCount ? <i>{addedCount}</i> : <i>0</i>} */}
 					</button>
 				</div>
 			</div>
 		</div>
 	);
 }
-
-export default Pizza;

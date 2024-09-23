@@ -1,5 +1,5 @@
 import Layout from './Layouts/Layout';
-import NotFoundBlock from '../components/NotFoundBlock';
+import { NotFoundBlock } from '../components';
 
 const NotFound: React.FC = () => {
 	return (

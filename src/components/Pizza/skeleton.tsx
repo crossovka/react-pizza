@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-const PizzaSkeleton: React.FC = () => (
+export const PizzaSkeleton: React.FC = () => (
 	<ContentLoader
 		viewBox="0 0 280 490"
 		height={490}
@@ -16,5 +16,3 @@ const PizzaSkeleton: React.FC = () => (
 		<rect x="125" y="446" rx="24" ry="24" width="152" height="45" />
 	</ContentLoader>
 );
-
-export default PizzaSkeleton;

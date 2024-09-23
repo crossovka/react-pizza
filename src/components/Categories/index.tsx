@@ -6,7 +6,7 @@ type CategoryProps = {
 	onCategorySelect: (i: number) => void;
 };
 
-const Categories: React.FC<CategoryProps> = memo(({ categories, activeCategory, onCategorySelect }) => {
+export const Categories: React.FC<CategoryProps> = memo(({ categories, activeCategory, onCategorySelect }) => {
 	// useWhyDidYouUpdate('Categories', { categories, activeCategory, onCategorySelect});
 	
 	return (
@@ -26,5 +26,3 @@ const Categories: React.FC<CategoryProps> = memo(({ categories, activeCategory, 
 	);
 }
 );
-
-export default Categories;

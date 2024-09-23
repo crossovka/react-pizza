@@ -6,6 +6,7 @@ export const pizzaTypes = ['тонкое', 'традиционное'];
 import { SortItemType, SortPropertyEnum } from "../redux/slices/filter/types";
 
 export const sortList: SortItemType[] = [
+	{ name: 'популярности (Asc)', sortProperty: SortPropertyEnum.RATING_ASC },
 	{ name: 'популярности (Desc)', sortProperty: SortPropertyEnum.RATING_DESC },
 	{ name: 'цене (Asc)', sortProperty: SortPropertyEnum.PRICE_ASC },
 	{ name: 'цене (Desc)', sortProperty: SortPropertyEnum.PRICE_DESC },

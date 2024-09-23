@@ -1,8 +1,6 @@
 import { usePizzas } from '../hooks/usePizzas';
 
-import Categories from '../components/Categories/index.js';
-import Sort from '../components/Sort.js';
-import Pagination from '../components/Pagination/index.js';
+import { Categories, Sort, Pagination} from '../components';
 
 import { pizzasCategories } from '../constants';
 
@@ -21,7 +19,7 @@ const Home: React.FC = function () {
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">{renderPizzas()}</div>
-			{totalPages > 0 && (
+			{totalPages > 1 && (
 				<Pagination
 					onChangePage={handlePageChange}
 					totalPages={totalPages}

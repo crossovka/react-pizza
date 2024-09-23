@@ -11,7 +11,7 @@ type SortProps = {
 };
 
 // React.memo can be superfluous | unnecessary ??
-const Sort: React.FC<SortProps> = memo(({ sortOption }) => {
+export const Sort: React.FC<SortProps> = memo(({ sortOption }) => {
 	const dispatch = useDispatch();
 	const sortRef = useRef<HTMLDivElement>(null);
 
@@ -83,5 +83,3 @@ const Sort: React.FC<SortProps> = memo(({ sortOption }) => {
 		</div>
 	);
 });
-
-export default Sort;
