@@ -28,11 +28,11 @@ const Header: React.FC = () => {
 		<header className="header">
 			<div className="container">
 				<div className="header__logo">
-					<Link to="/">
+					<Link to="/react-pizza/">
 						<img width="38" src={logo} alt="Pizza logo" />
 					</Link>
 					<div>
-						<Link to="/">
+						<Link to="/react-pizza/">
 							<h1>React Pizza</h1>
 						</Link>
 						<p>самая вкусная пицца во вселенной</p>

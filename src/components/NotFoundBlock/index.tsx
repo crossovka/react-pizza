@@ -8,7 +8,7 @@ export const NotFoundBlock: React.FC = () => {
 		<div className={styles['not-found']}>
 			<h1 className={styles['not-found__title']}>Page not found</h1>
 			<img className={styles['not-found__img']} src={notFound} alt="Trash" />
-			<Link className={styles['not-found__link']} to="/">
+			<Link className={styles['not-found__link']} to="/react-pizza/">
 				back home
 			</Link>
 		</div>

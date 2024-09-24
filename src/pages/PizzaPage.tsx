@@ -59,7 +59,7 @@ const PizzaPage: React.FC = () => {
 					/>
 					<p>{pizza.description}</p>
 					<span>{pizza.price} ₽</span>
-					<Link to="/" className="button button--outline">
+					<Link to="/react-pizza/" className="button button--outline">
 						Назад
 					</Link>
 				</>

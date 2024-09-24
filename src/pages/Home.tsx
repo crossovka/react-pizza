@@ -19,7 +19,7 @@ const Home: React.FC = function () {
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">{renderPizzas()}</div>
-			{totalPages > 1 && (
+			{totalPages > 0 && (
 				<Pagination
 					onChangePage={handlePageChange}
 					totalPages={totalPages}

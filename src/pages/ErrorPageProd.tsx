@@ -9,7 +9,7 @@ const ProdErrorPage: React.FC = function () {
 		<div id="error-page">
 			<h1>Oops! (Production Mode)</h1>
 			<p>Sorry, an unexpected error has occurred.</p>
-			<Link to="/" className="button">
+			<Link to="/react-pizza/" className="button">
 				back home
 			</Link>
 		</div>
