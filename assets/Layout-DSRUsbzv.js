@@ -1,0 +1,1 @@
+import{j as s,H as e}from"./index-B_S90blh.js";const n=({children:a})=>s.jsx("div",{className:"App",children:s.jsxs("div",{className:"wrapper",children:[s.jsx(e,{}),s.jsx("main",{className:"content",children:s.jsx("div",{className:"container",children:a})})]})});export{n as L};
