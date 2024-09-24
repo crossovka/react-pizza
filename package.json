@@ -1,5 +1,5 @@
 {
-	"homepage": "https://crossovka.github.io/react-pizza/",
+	"homepage": "https://crossovka.github.io/react-pizza",
   "name": "react-pizza",
   "private": true,
   "version": "0.1.0",
@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+		"predeploy": "npm run build",
 		"deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
