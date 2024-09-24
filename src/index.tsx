@@ -20,7 +20,7 @@ const ErrorPage = isDevelopment ? DevErrorPage : ProdErrorPage;
 
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: '/react-pizza/',
 		element: <App />,
 		errorElement: <ErrorPage />,
 	},
