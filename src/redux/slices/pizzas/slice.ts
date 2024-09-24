@@ -23,9 +23,10 @@ const pizzaSlice = createSlice({
 			})
 			.addCase(
 				fetchPizzas.fulfilled,
-				(state, action: PayloadAction<Pizza[]>) => {
+				(state, action: PayloadAction<{ items: Pizza[], meta: { total_pages: number } }>) => {
 					state.isLoading = false;
-					state.pizzas = action.payload;
+					state.pizzas = action.payload.items;
+					state.totalPages = action.payload.meta.total_pages;
 					state.status = Status.SUCCESS;
 				}
 			)

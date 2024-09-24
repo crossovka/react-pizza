@@ -55,7 +55,6 @@ export const usePizzas = () => {
 
 		return pizzas.map((pizza: PizzaType) => (
 			<Pizza key={pizza.id} {...pizza} />
-			
 		));
 	};
 
