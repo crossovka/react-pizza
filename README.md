@@ -29,6 +29,10 @@
 
 Проект построен с использованием современных методов разработки, включая компоненты на React, управление состоянием через Redux и асинхронные операции с использованием Redux Toolkit. Код организован по принципам чистой архитектуры, что облегчает его поддержку и расширение.
 
+![alt text](./imgs/1.png)
+![alt text](./imgs/2.png)
+![alt text](./imgs/3.png)
+
 ---
 
 ## Технологический стек
@@ -146,6 +150,10 @@
 This project is a web application for ordering pizza, where users can choose various types of pizzas, filter them by categories, sort them by popularity and price, and add them to a cart for checkout. The application also supports pagination, loading animations, and responsive design for various devices.
 
 The project is built using modern development practices, including React components, state management with Redux, and asynchronous operations using Redux Toolkit. The code is organized following clean architecture principles, making it easier to maintain and extend.
+
+![alt text](./imgs/1.png)
+![alt text](./imgs/2.png)
+![alt text](./imgs/3.png)
 
 ---
 
